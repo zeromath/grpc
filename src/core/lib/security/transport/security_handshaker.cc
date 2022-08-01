@@ -397,6 +397,9 @@ grpc_error_handle SecurityHandshaker::OnHandshakeNextDoneLocked(
         /*urgent=*/true, /*min_progress_size=*/1);
     return error;
   }
+  if (result == TSI_ASYNC) {
+    return GRPC_ERROR_NOEN;
+  }
   if (result != TSI_OK) {
     auto* security_connector =
         grpc_security_connector_find_in_args(args_->args);
